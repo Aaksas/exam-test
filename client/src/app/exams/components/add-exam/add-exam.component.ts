@@ -36,8 +36,6 @@ export class AddExamComponent {
     this.exam.meeting_point = this.exam.meeting_point || 'En attente';
 
     if (this.exam.date && this.exam.time) {
-      console.log('this.exam.time', this.exam.time);
-
       // Concatenate `date` and `time` strings in `YYYY-MM-DDTHH:mm:ss` format
       this.exam.date = `${this.exam.date}T${this.exam.time}:00`; // Add seconds as `:00`
     } else {

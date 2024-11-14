@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./exam-list.component.scss'],
 })
 export class ExamListComponent implements OnInit {
-  exams: any[] = [];
+  exams: Exam[] = [];
 
   constructor(private examService: ExamService, private router: Router) {}
 
@@ -31,15 +31,15 @@ export class ExamListComponent implements OnInit {
     });
   }
 
-  extractDate(dateTime: string | undefined): string | null {
+  extractDate(dateTime: string | undefined): string | undefined {
     // Check if dateTime is a valid ISO date string
     if (dateTime && !isNaN(Date.parse(dateTime))) {
       return new Date(dateTime).toISOString().split('T')[0]; // Return 'yyyy-MM-dd' part
     }
-    return null; // Return null if invalid
+    return undefined; // Return null if invalid
   }
 
-  extractTime(dateTime: string | undefined): string | null {
+  extractTime(dateTime: string | undefined): string | undefined {
     // Check if dateTime is a valid ISO date string
     if (dateTime && dateTime.includes('T')) {
       // Split the string by 'T' to separate date and time, then take the time part
