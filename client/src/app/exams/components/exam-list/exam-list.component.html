@@ -1,0 +1,53 @@
+<div class="exam-list-container">
+  <h1>Mes examens</h1>
+  <p>{{ exams.length }} examens à venir</p>
+  <button class="organize-exam-button" (click)="navigateToAddExam()">
+    Organiser un examen
+  </button>
+
+  <div *ngFor="let exam of exams" class="exam-item">
+    <div class="exam-details">
+      <!-- Name with FontAwesome User Icon -->
+      <div class="exam-name">
+        <i class="fas fa-user"></i> {{ exam.student.first_name }}.{{
+          exam.student.last_name.charAt(0)
+        }}
+      </div>
+
+      <!-- Location with FontAwesome Map Marker Icon -->
+      <div class="exam-location">
+        <i class="fas fa-map-marker-alt"></i>
+        {{ exam.meeting_point || "En attente" }}
+      </div>
+
+      <!-- Date with FontAwesome Calendar Icon -->
+      <div class="exam-date">
+        <i class="fas fa-calendar-alt"></i>
+        {{ exam.date ? (exam.date | date : "dd MMM") : "En attente" }}
+      </div>
+
+      <!-- Time with FontAwesome Clock Icon -->
+      <div class="exam-time">
+        <i class="fas fa-clock"></i> {{ exam.time || "En attente" }}
+      </div>
+
+      <!-- Status with FontAwesome Icons for each status type -->
+      <div class="exam-status">
+        <ng-container [ngSwitch]="exam.status">
+          <span *ngSwitchCase="'Confirmé'" class="status confirmed">
+            <i class="fas fa-check-circle"></i> Confirmé
+          </span>
+          <span *ngSwitchCase="'À organiser'" class="status to-organize">
+            <i class="fas fa-exclamation-triangle"></i> À organiser
+          </span>
+          <span *ngSwitchCase="'Annulé'" class="status cancelled">
+            <i class="fas fa-times-circle"></i> Annulé
+          </span>
+          <span *ngSwitchDefault class="status searching">
+            <i class="fas fa-hourglass-half"></i> En recherche de place
+          </span>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
